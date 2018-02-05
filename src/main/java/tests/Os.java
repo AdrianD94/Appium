@@ -1,6 +1,7 @@
 package tests;
 
 import enums.Mobile;
+import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -12,8 +13,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Os {
-    public static WebDriver getDriver(Mobile mobileOs) throws MalformedURLException {
-        WebDriver driver = null;
+    public static AndroidDriver getDriver(Mobile mobileOs) throws MalformedURLException {
+        AndroidDriver driver = null;
 
         switch (mobileOs) {
             case ANDROID:
@@ -29,7 +30,7 @@ public class Os {
                 capabilities.setCapability("appActivity","com.guzmanygomez.gyg.ui.activities.MainActivity"); // This is Launcher activity of your app (you can get it from apk info app)
 //Create RemoteWebDriver instance and connect to the Appium server
                 //It will launch the Calculator App in Android Device using the configurations specified in Desired Capabilities
-                driver = new RemoteWebDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+                driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
                 break;
 
 

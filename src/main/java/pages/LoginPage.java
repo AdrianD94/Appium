@@ -1,4 +1,5 @@
 package pages;
+import io.appium.java_client.android.AndroidDriver;
 import models.LoginModel;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,16 +9,17 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 public class LoginPage {
-    WebDriver driver;
+    AndroidDriver driver;
 
-    public LoginPage(WebDriver driverLn) {
+    /*public LoginPage(AndroidDriver driverLn) {
         {
             this.driver = driverLn;
         }
 
-    }
+    }*/
 
     @FindBy(how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/android.widget.FrameLayout/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.Button[2]")
     private WebElement loginInButton;
@@ -38,14 +40,15 @@ public class LoginPage {
    public void LoginFlow(LoginModel model) throws InterruptedException {
        Thread.sleep(5000);
        loginInButton.click();
-        emailField.click();
-        emailField.clear();
+        //emailField.click();
+        //emailField.clear();
         emailField.sendKeys(model.getEmailAddress());
-        passwordField.click();
-        passwordField.clear();
+        //passwordField.click();
+        //passwordField.clear();
         passwordField.sendKeys(model.getPassword());
         loginButton.click();
-        Thread.sleep(4000);
+
+
         //assertFalse(loginError.isDisplayed());
     }
 

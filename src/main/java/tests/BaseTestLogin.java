@@ -1,6 +1,7 @@
 package tests;
 
 import enums.Mobile;
+import io.appium.java_client.android.AndroidDriver;
 import org.junit.After;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -16,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  * Created by casab on 11/2/2017.
  */
 public class BaseTestLogin {
-    public WebDriver driver;
+    public AndroidDriver driver;
 
     @BeforeMethod
     public void setUp() throws InterruptedException, MalformedURLException {
