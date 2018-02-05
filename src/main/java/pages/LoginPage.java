@@ -12,14 +12,14 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class LoginPage {
-    AndroidDriver driver;
+    WebDriver driver;
 
-    /*public LoginPage(AndroidDriver driverLn) {
+    public LoginPage(WebDriver driverLn) {
         {
             this.driver = driverLn;
         }
 
-    }*/
+    }
 
     @FindBy(how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/android.widget.FrameLayout/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.Button[2]")
     private WebElement loginInButton;
@@ -36,6 +36,10 @@ public class LoginPage {
     @FindBy (how = How.ID, using = "com.guzmanygomez.gyg.uat:id/dialog_tb_tv_text")
     private WebElement loginError;
 
+    @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/android.widget.FrameLayout/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.TextView[2]")
+    private WebElement welcomeMessage;
+
+
 
    public void LoginFlow(LoginModel model) throws InterruptedException {
        Thread.sleep(5000);
@@ -48,6 +52,12 @@ public class LoginPage {
         passwordField.sendKeys(model.getPassword());
         loginButton.click();
 
+        WebDriverWait wait = new WebDriverWait(driver,15);
+        wait.until(ExpectedConditions.visibilityOf(welcomeMessage));
+
+        assertTrue(welcomeMessage.isDisplayed());
+
+        System.out.println("Login test passed");
 
         //assertFalse(loginError.isDisplayed());
     }
