@@ -36,7 +36,11 @@ public class LoginTest extends BaseTestLogin {
     public void mainLoginTest(LoginModel loginModel) throws InterruptedException {
         LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 
-        loginPage.LoginFlow(loginModel);
+        //loginPage.LoginFlow(loginModel);
+
+        Thread.sleep(2000);
+
+        loginPage.CheckEmptyOrders("Westfield Whitford");
 
 
     }
