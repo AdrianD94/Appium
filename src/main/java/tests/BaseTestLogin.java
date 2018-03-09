@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  * Created by casab on 11/2/2017.
  */
 public class BaseTestLogin {
-    public WebDriver driver;
+    public AndroidDriver driver;
 
     @BeforeMethod
     public void setUp() throws InterruptedException, MalformedURLException {

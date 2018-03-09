@@ -23,14 +23,14 @@ import static io.appium.java_client.touch.offset.PointOption.point;
 import static org.testng.Assert.*;
 
 public class LoginPage {
-    WebDriver driver;
+    AndroidDriver driver;
 
-    public LoginPage(WebDriver driverLn) {
+    /*public LoginPage(WebDriver driverLn) {
         {
             this.driver = driverLn;
         }
 
-    }
+    }*/
 
     @FindBy(how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/android.widget.FrameLayout/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.Button[2]")
     private WebElement loginInButton;
@@ -92,19 +92,24 @@ public class LoginPage {
 
 
     public void CheckEmptyOrders(String storeName) throws InterruptedException {
-
+        Thread.sleep(5000);
         //WebDriverWait wait=new WebDriverWait(driver,20);
         //wait.until(ExpectedConditions.visibilityOf(locationButton));
         locationButton.click();
         Thread.sleep(5000);
-        //searchField.sendKeys(storeName);
-        //Thread.sleep(5000);
-
-
-        driver.findElement(By.xpath("//*[@text='"+storeName+"']")).click();
+        searchField.sendKeys(storeName);
         Thread.sleep(5000);
 
-        //tap.longPress(point(270,576)).release();
+
+        //driver.findElement(By.xpath("//*[@text='"+storeName+"']")).click();
+        //Thread.sleep(5000);
+
+        TouchAction tap=new TouchAction(driver);
+        tap.press(PointOption.point(202,594)).release();
+        tap.perform();
+
+
+        //tap.longPress(point(202,594)).release();
         //tap.longPress(-250,600).release();
         //Thread.sleep(5000);
 
