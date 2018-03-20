@@ -1,6 +1,8 @@
 package tests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.offset.PointOption;
 import models.LoginModel;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -34,6 +36,19 @@ public class LoginTest extends BaseTestLogin {
 
     @Test(dataProvider = "LoginJson")
     public void mainLoginTest(LoginModel loginModel) throws InterruptedException {
+        LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+
+        loginPage.LoginFlow(loginModel);
+
+        /*Thread.sleep(2000);
+
+        loginPage.CheckEmptyOrders("Westfield Whitford");
+        */
+
+    }
+
+    @Test(dataProvider = "LoginJson")
+    public void sendRestaurantName(LoginModel loginModel) throws InterruptedException {
         LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 
         //loginPage.LoginFlow(loginModel);

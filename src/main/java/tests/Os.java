@@ -13,8 +13,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Os {
-    public static AndroidDriver getDriver(Mobile mobileOs) throws MalformedURLException {
-        AndroidDriver driver = null;
+    public static WebDriver getDriver(Mobile mobileOs) throws MalformedURLException {
+        WebDriver driver = null;
 
         switch (mobileOs) {
             case ANDROID:

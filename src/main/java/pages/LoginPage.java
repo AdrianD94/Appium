@@ -1,4 +1,6 @@
 package pages;
+import enums.Mobile;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
@@ -14,7 +16,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import tests.Os;
 
+import java.net.MalformedURLException;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
@@ -23,14 +27,14 @@ import static io.appium.java_client.touch.offset.PointOption.point;
 import static org.testng.Assert.*;
 
 public class LoginPage {
-    AndroidDriver driver;
+    WebDriver driver;
 
-    /*public LoginPage(WebDriver driverLn) {
+    public LoginPage(WebDriver driverLn) {
         {
             this.driver = driverLn;
         }
 
-    }*/
+    }
 
     @FindBy(how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/android.widget.FrameLayout/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.Button[2]")
     private WebElement loginInButton;
@@ -63,6 +67,8 @@ public class LoginPage {
     @FindBy (how = How.XPATH, using = " /hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.support.v7.widget.RecyclerView/android.widget.RelativeLayout[1]/android.widget.RelativeLayout/android.widget.TextView[1]")
     private WebElement storeNameResult;
 
+    public LoginPage() throws MalformedURLException {
+    }
 
 
     public void LoginFlow(LoginModel model) throws InterruptedException {
@@ -99,44 +105,11 @@ public class LoginPage {
         Thread.sleep(5000);
         searchField.sendKeys(storeName);
         Thread.sleep(5000);
-
-
-        //driver.findElement(By.xpath("//*[@text='"+storeName+"']")).click();
-        //Thread.sleep(5000);
-
-        TouchAction tap=new TouchAction(driver);
+        TouchAction tap=new TouchAction((AndroidDriver)driver);
         tap.press(PointOption.point(202,594)).release();
         tap.perform();
 
-
-        //tap.longPress(point(202,594)).release();
-        //tap.longPress(-250,600).release();
-        //Thread.sleep(5000);
-
-        //TouchAction swipe=new TouchAction(driver);
-        //Thread.sleep(5000);
-        //swipe.press(195,585);
-        //Thread.sleep(5000);
-        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(), '"+storeName+"')]")));
-        //assertNotNull(driver.findElement(By.xpath("//*[contains(text(), '"+storeName+"')]")));
-        //driver.findElement(By.xpath("//*[contains(text(), '"+storeName+"')]")).click();
-
-        //wait.until(ExpectedConditions.visibilityOf(searchField));
-        //searchField.click();
-        //searchField.sendKeys(storeName);
-
-        //searchField.sendKeys(storeName);
-        //driver.findElement(By.id("com.guzmanygomez.gyg.uat:id/choose_store_list")).sendKeys(storeName);
-        //List<WebElement> listItems=driver.findElements(By.id("com.guzmanygomez.gyg.uat:id/choose_store_list"));
-        //listItems.get(0).click();
-        /*wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.guzmanygomez.gyg.uat:id/choose_store_list")));
-        driver.findElement(By.id("com.guzmanygomez.gyg.uat:id/choose_store_list")).click();
-        List<WebElement> listItems=driver.findElements(By.id("com.guzmanygomez.gyg.uat:id/choose_store_list"));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.guzmanygomez.gyg.uat:id/choose_store_list")));
-        listItems.get(0).click();
-        */
-
-
+        Thread.sleep(5000);
 
 
 
