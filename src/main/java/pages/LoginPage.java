@@ -101,6 +101,13 @@ public class LoginPage {
     @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.TextView[2]\n")
     private WebElement orderStatus;
 
+    @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.RelativeLayout/android.support.v7.widget.RecyclerView/android.widget.FrameLayout[6]/android.widget.RelativeLayout/android.widget.ImageView[1]\n")
+    private WebElement Churros;
+
+
+    @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.RelativeLayout/android.widget.TextView\n")
+    private WebElement ChurrosErrorMessage;
+
 
     public void LoginFlow(LoginModel model) throws InterruptedException {
       WebDriverWait wait=new WebDriverWait(driver,20);
@@ -198,6 +205,88 @@ public class LoginPage {
 
     }
 
+    public void CheckChurosScenario(String storeName) throws InterruptedException {
+        WebDriverWait wait=new WebDriverWait(driver,30);
+        wait.until(ExpectedConditions.visibilityOf(locationButton));
+        locationButton.click();
+        wait.until(ExpectedConditions.visibilityOf(searchField));
+        searchField.sendKeys(storeName);
+
+        Thread.sleep(3000);
+        TouchAction tap=new TouchAction((AndroidDriver)driver);
+        tap.press(PointOption.point(202,594)).release();
+        tap.perform();
+
+        wait.until(ExpectedConditions.visibilityOf(orderNowButton));
+        orderNowButton.click();
+
+        Thread.sleep(9000);
+
+        Dimension size = this.driver.manage ()
+                .window ()
+                .getSize ();
+        int startX = size.getWidth () / 2;
+        int startY = size.getHeight () / 2;
+        int endX = 0;
+        int endY = (int) (startY * -1 * 0.75);
+
+        tap.press (PointOption.point(startX, startY))
+                .moveTo (PointOption.point(endX, endY))
+                .release ()
+                .perform ();
+
+        Thread.sleep(5000);
+
+        wait.until(ExpectedConditions.visibilityOf(Churros));
+        Churros.click();
+
+        //wait.until(ExpectedConditions.visibilityOf(nextButtonFillings));
+
+        //nextButtonFillings.click();
+
+        wait.until(ExpectedConditions.visibilityOf(nextButtonExtras));
+        nextButtonExtras.click();
+
+        //wait.until(ExpectedConditions.visibilityOf(addPayButton));
+        //addPayButton.click();
+
+        wait.until(ExpectedConditions.visibilityOf(checkoutButton));
+        checkoutButton.click();
+
+        Thread.sleep(9000);
+
+
+      /* tap.longPress(PointOption.point(700,1866));
+       tap.moveTo(PointOption.point(712,1866));
+       tap.release();
+       tap.perform();
+        */
+
+        Dimension size2 = this.driver.manage ()
+                .window ()
+                .getSize ();
+        int startX2 = size.getWidth () / 2;
+        int startY2 = size.getHeight () / 2;
+        int endX2 = 0;
+        int endY2 = (int) (startY * -1 * 0.75);
+
+        tap.press (PointOption.point(startX2, startY2))
+                .moveTo (PointOption.point(endX2, endY2))
+                .release ()
+                .perform ();
+
+        wait.until(ExpectedConditions.visibilityOf(payPallButton));
+        payPallButton.click();
+
+        wait.until(ExpectedConditions.visibilityOf(tapToMakeOrderButton));
+        tapToMakeOrderButton.click();
+
+        Thread.sleep(10000);
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.RelativeLayout/android.widget.TextView")));
+
+        Assert.assertEquals(ChurrosErrorMessage.getText(),"Error");
+    }
 
 
 }
