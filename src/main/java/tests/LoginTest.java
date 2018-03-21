@@ -34,7 +34,7 @@ public class LoginTest extends BaseTestLogin {
         return dp.iterator();
     }
 
-    @Test(dataProvider = "LoginJson")
+    /*@Test(dataProvider = "LoginJson")
     public void mainLoginTest(LoginModel loginModel) throws InterruptedException {
         LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 
@@ -43,19 +43,19 @@ public class LoginTest extends BaseTestLogin {
         /*Thread.sleep(2000);
 
         loginPage.CheckEmptyOrders("Westfield Whitford");
-        */
 
-    }
+
+    }*/
 
     @Test(dataProvider = "LoginJson")
-    public void sendRestaurantName(LoginModel loginModel) throws InterruptedException {
+    public void AddProductToCartTest(LoginModel loginModel) throws InterruptedException {
         LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 
         //loginPage.LoginFlow(loginModel);
 
         Thread.sleep(2000);
 
-        loginPage.CheckEmptyOrders("Westfield Whitford");
+        loginPage.AddProductToCart("Perth Airport");
 
 
     }
