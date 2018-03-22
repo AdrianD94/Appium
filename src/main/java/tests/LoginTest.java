@@ -66,10 +66,24 @@ public class LoginTest extends BaseTestLogin {
 
         Thread.sleep(2000);
 
-        loginPage.AddProductToCart("Perth Airport");
+        loginPage.AddProductToCart("Newtown");
 
 
     }
+
+    @Test(dataProvider = "LoginJson",priority=4)
+    public void Reorder(LoginModel loginModel) throws InterruptedException {
+        LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+
+
+
+        Thread.sleep(2000);
+
+        loginPage.reorder("Newtown");
+
+
+    }
+
 
 
 
