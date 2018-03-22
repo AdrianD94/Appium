@@ -2,6 +2,8 @@ package tests;
 
 import enums.Mobile;
 import io.appium.java_client.android.AndroidDriver;
+import org.apache.commons.logging.Log;
+import org.aspectj.apache.bcel.classfile.Constant;
 import org.junit.After;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -21,6 +23,9 @@ public class BaseTestLogin {
 
     @BeforeMethod
     public void setUp() throws InterruptedException, MalformedURLException {
+
+
+
         driver = Os.getDriver(Mobile.ANDROID);
 
 
