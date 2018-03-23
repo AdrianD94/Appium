@@ -221,10 +221,8 @@ public class LoginPage {
     }
 
     public void CheckChurosScenario(String storeName) throws InterruptedException {
-        WebDriverWait wait =new WebDriverWait(driver,20);
-
-
-
+        WebDriverWait wait =new WebDriverWait(driver,50);
+        
         wait.until(ExpectedConditions.visibilityOf(locationButton));
         locationButton.click();
         wait.until(ExpectedConditions.visibilityOf(searchField));
@@ -290,7 +288,6 @@ public class LoginPage {
 
         wait.until(ExpectedConditions.visibilityOf(tapToMakeOrderButton));
         tapToMakeOrderButton.click();
-
 
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.RelativeLayout/android.widget.TextView")));
