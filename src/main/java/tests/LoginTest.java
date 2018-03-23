@@ -34,20 +34,20 @@ public class LoginTest extends BaseTestLogin {
         return dp.iterator();
     }
 
-  /*  @Test(dataProvider = "LoginJson",priority = 1)
+    @Test(dataProvider = "LoginJson",priority = 1)
     public void mainLoginTest(LoginModel loginModel) throws InterruptedException {
         LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 
         loginPage.LoginFlow(loginModel);
 
-    }*/
+    }
     @Test(dataProvider = "LoginJson",priority=2)
     public void ChurosScenario(LoginModel loginModel) throws InterruptedException {
         LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
         loginPage.CheckChurosScenario("Newtown");
 
     }
-   /* @Test(dataProvider = "LoginJson",priority=3)
+    @Test(dataProvider = "LoginJson",priority=3)
     public void AddProductToCartTest(LoginModel loginModel) throws InterruptedException {
         LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
         loginPage.AddProductToCart("Newtown");
@@ -63,7 +63,7 @@ public class LoginTest extends BaseTestLogin {
 
     }
 
-*/
+
 
 
 
