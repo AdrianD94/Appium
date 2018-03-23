@@ -34,38 +34,22 @@ public class LoginTest extends BaseTestLogin {
         return dp.iterator();
     }
 
-    @Test(dataProvider = "LoginJson",priority = 1)
+  /*  @Test(dataProvider = "LoginJson",priority = 1)
     public void mainLoginTest(LoginModel loginModel) throws InterruptedException {
         LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 
         loginPage.LoginFlow(loginModel);
 
-        Thread.sleep(2000);
-
-        //loginPage.CheckEmptyOrders("Westfield Whitford");
-
-
-    }
+    }*/
     @Test(dataProvider = "LoginJson",priority=2)
     public void ChurosScenario(LoginModel loginModel) throws InterruptedException {
         LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
-
-        //loginPage.LoginFlow(loginModel);
-
-        Thread.sleep(2000);
-
-        //loginPage.AddProductToCart("Perth Airport");
         loginPage.CheckChurosScenario("Newtown");
 
     }
-    @Test(dataProvider = "LoginJson",priority=3)
+   /* @Test(dataProvider = "LoginJson",priority=3)
     public void AddProductToCartTest(LoginModel loginModel) throws InterruptedException {
         LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
-
-        //loginPage.LoginFlow(loginModel);
-
-        Thread.sleep(2000);
-
         loginPage.AddProductToCart("Newtown");
 
 
@@ -74,17 +58,12 @@ public class LoginTest extends BaseTestLogin {
     @Test(dataProvider = "LoginJson",priority=4)
     public void Reorder(LoginModel loginModel) throws InterruptedException {
         LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
-
-
-
-        Thread.sleep(2000);
-
         loginPage.reorder("Newtown");
 
 
     }
 
-
+*/
 
 
 
