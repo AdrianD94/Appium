@@ -16,6 +16,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import tests.Os;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.time.Duration;
 import java.util.HashMap;
@@ -108,6 +109,27 @@ public class LoginPage {
     @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.RelativeLayout/android.widget.TextView\n")
     private WebElement ChurrosErrorMessage;
 
+    @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/android.widget.FrameLayout/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.TextView[2]")
+    private WebElement reorderChangeLocation;
+
+    @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.EditText\n")
+    private WebElement reorderSearchInput;
+
+    @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.EditText\n")
+    private WebElement reorderButtonHome;
+
+    @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout\n")
+    private WebElement yourLastMealDialog;
+
+    @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.ImageView[3]\n")
+    private WebElement yourLastMealDialog3Star;
+
+    @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.TextView\n")
+    private WebElement yourLastMealDialogGraciasMessage;
+
+    @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.ViewSwitcher/android.widget.LinearLayout/android.widget.LinearLayout/android.support.v7.widget.RecyclerView/android.widget.FrameLayout[1]/android.widget.LinearLayout\n")
+    private WebElement payPallPurchase;
+
 
     public void LoginFlow(LoginModel model) throws InterruptedException {
       WebDriverWait wait=new WebDriverWait(driver,20);
@@ -136,13 +158,13 @@ public class LoginPage {
 
     public void AddProductToCart(String storeName) throws InterruptedException {
 
-        WebDriverWait wait=new WebDriverWait(driver,30);
+        WebDriverWait wait=new WebDriverWait(driver,60);
         wait.until(ExpectedConditions.visibilityOf(locationButton));
         locationButton.click();
         wait.until(ExpectedConditions.visibilityOf(searchField));
         searchField.sendKeys(storeName);
 
-        Thread.sleep(3000);
+        Thread.sleep(2000);
         TouchAction tap=new TouchAction((AndroidDriver)driver);
         tap.press(PointOption.point(202,594)).release();
         tap.perform();
@@ -167,14 +189,8 @@ public class LoginPage {
         wait.until(ExpectedConditions.visibilityOf(checkoutButton));
         checkoutButton.click();
 
-        Thread.sleep(9000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.view.ViewGroup\n")));
 
-
-      /* tap.longPress(PointOption.point(700,1866));
-       tap.moveTo(PointOption.point(712,1866));
-       tap.release();
-       tap.perform();
-        */
 
         Dimension size = this.driver.manage ()
                 .window ()
@@ -195,10 +211,9 @@ public class LoginPage {
         wait.until(ExpectedConditions.visibilityOf(tapToMakeOrderButton));
         tapToMakeOrderButton.click();
 
-        Thread.sleep(10000);
-        tap.press(PointOption.point(213,1283)).release().perform();
-        Thread.sleep(10000);
-
+        wait.until(ExpectedConditions.visibilityOf(payPallPurchase));
+        //tap.press(PointOption.point(213,1283)).release().perform();
+        payPallPurchase.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/android.widget.LinearLayout/android.widget.TextView")));
 
         Assert.assertEquals(orderStatus.getText(),"Success");
@@ -206,13 +221,14 @@ public class LoginPage {
     }
 
     public void CheckChurosScenario(String storeName) throws InterruptedException {
-        WebDriverWait wait=new WebDriverWait(driver,30);
+        WebDriverWait wait =new WebDriverWait(driver,50);
+
         wait.until(ExpectedConditions.visibilityOf(locationButton));
         locationButton.click();
         wait.until(ExpectedConditions.visibilityOf(searchField));
         searchField.sendKeys(storeName);
 
-        Thread.sleep(3000);
+        Thread.sleep(2000);
         TouchAction tap=new TouchAction((AndroidDriver)driver);
         tap.press(PointOption.point(202,594)).release();
         tap.perform();
@@ -220,7 +236,7 @@ public class LoginPage {
         wait.until(ExpectedConditions.visibilityOf(orderNowButton));
         orderNowButton.click();
 
-        Thread.sleep(9000);
+       wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.view.ViewGroup")));
 
         Dimension size = this.driver.manage ()
                 .window ()
@@ -234,8 +250,6 @@ public class LoginPage {
                 .moveTo (PointOption.point(endX, endY))
                 .release ()
                 .perform ();
-
-        Thread.sleep(5000);
 
         wait.until(ExpectedConditions.visibilityOf(Churros));
         Churros.click();
@@ -253,14 +267,8 @@ public class LoginPage {
         wait.until(ExpectedConditions.visibilityOf(checkoutButton));
         checkoutButton.click();
 
-        Thread.sleep(9000);
+       wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.view.ViewGroup\n")));
 
-
-      /* tap.longPress(PointOption.point(700,1866));
-       tap.moveTo(PointOption.point(712,1866));
-       tap.release();
-       tap.perform();
-        */
 
         Dimension size2 = this.driver.manage ()
                 .window ()
@@ -281,7 +289,6 @@ public class LoginPage {
         wait.until(ExpectedConditions.visibilityOf(tapToMakeOrderButton));
         tapToMakeOrderButton.click();
 
-        Thread.sleep(10000);
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.RelativeLayout/android.widget.TextView")));
 
@@ -289,4 +296,53 @@ public class LoginPage {
     }
 
 
+    public void reorder(String storeName) throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, 50);
+
+            wait.until(ExpectedConditions.visibilityOf(reorderChangeLocation));
+            reorderChangeLocation.click();
+
+            wait.until(ExpectedConditions.visibilityOf(reorderSearchInput));
+            reorderSearchInput.sendKeys(storeName);
+            Thread.sleep(2000);
+            TouchAction tap = new TouchAction((AndroidDriver) driver);
+            tap.press(PointOption.point(219, 588)).release().perform();
+            wait.until(ExpectedConditions.visibilityOf(welcomeMessage));
+            tap.press(PointOption.point(1037, 1390)).release().perform();
+            wait.until(ExpectedConditions.visibilityOf(checkoutButton));
+            checkoutButton.click();
+
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.view.ViewGroup\n")));
+
+
+        Dimension size = this.driver.manage()
+                    .window()
+                    .getSize();
+            int startX = size.getWidth() / 2;
+            int startY = size.getHeight() / 2;
+            int endX = 0;
+            int endY = (int) (startY * -1 * 0.75);
+
+            tap.press(PointOption.point(startX, startY))
+                    .moveTo(PointOption.point(endX, endY))
+                    .release()
+                    .perform();
+
+            wait.until(ExpectedConditions.visibilityOf(payPallButton));
+            payPallButton.click();
+
+            wait.until(ExpectedConditions.visibilityOf(tapToMakeOrderButton));
+            tapToMakeOrderButton.click();
+
+            wait.until(ExpectedConditions.visibilityOf(payPallPurchase));
+            //tap.press(PointOption.point(213,1283)).release().perform();
+            payPallPurchase.click();
+
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/android.widget.LinearLayout/android.widget.TextView")));
+
+            Assert.assertEquals(orderStatus.getText(), "Success");
+
+
+
+    }
 }
