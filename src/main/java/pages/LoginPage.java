@@ -222,7 +222,7 @@ public class LoginPage {
 
     public void CheckChurosScenario(String storeName) throws InterruptedException {
         WebDriverWait wait =new WebDriverWait(driver,50);
-        
+
         wait.until(ExpectedConditions.visibilityOf(locationButton));
         locationButton.click();
         wait.until(ExpectedConditions.visibilityOf(searchField));
@@ -304,7 +304,7 @@ public class LoginPage {
 
             wait.until(ExpectedConditions.visibilityOf(reorderSearchInput));
             reorderSearchInput.sendKeys(storeName);
-
+            Thread.sleep(2000);
             TouchAction tap = new TouchAction((AndroidDriver) driver);
             tap.press(PointOption.point(219, 588)).release().perform();
             wait.until(ExpectedConditions.visibilityOf(welcomeMessage));
