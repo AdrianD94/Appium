@@ -41,12 +41,12 @@ public class LoginTest extends BaseTestLogin {
         loginPage.LoginFlow(loginModel);
 
     }
-    @Test(dataProvider = "LoginJson",priority=2)
+    /*@Test(dataProvider = "LoginJson",priority=2)
     public void ChurosScenario(LoginModel loginModel) throws InterruptedException {
         LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
         loginPage.CheckChurosScenario("Newtown");
 
-    }
+    }*/
     @Test(dataProvider = "LoginJson",priority=3)
     public void AddProductToCartTest(LoginModel loginModel) throws InterruptedException {
         LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);

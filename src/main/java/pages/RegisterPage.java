@@ -88,8 +88,8 @@ public class RegisterPage {
     @FindBy(how = How.ID, using = "com.guzmanygomez.gyg.uat:id/f_info_but_finish")
     private WebElement finishButton;
 
-    @FindBy(how = How.ID, using = "com.guzmanygomez.gyg.uat:id/home_tv_welcome\n")
-    private WebElement homepageWelcomeButton;
+    @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/android.widget.FrameLayout/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.TextView[2]")
+    private WebElement welcomeMessage;
 
     public void RegisterFlow(RegisterModel model) throws InterruptedException {
 
@@ -161,8 +161,8 @@ public class RegisterPage {
         finishButton.click();
 
         //Check the home page redirect
-        wait.until(ExpectedConditions.visibilityOf(homepageWelcomeButton));
-        assertEquals(homepageWelcomeButton.getText(),"Welcome "+model.getFirstName());
+        wait.until(ExpectedConditions.visibilityOf(welcomeMessage));
+        assertEquals(welcomeMessage.getText(),"Welcome "+model.getFirstName());
     }
 
 
