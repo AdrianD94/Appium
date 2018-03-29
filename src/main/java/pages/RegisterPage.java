@@ -150,7 +150,8 @@ public class RegisterPage {
         phoneNumberScreen.click();
 
         Thread.sleep(10000);
-        //wait.until(ExpectedConditions.visibilityOf(ContinueButton));
+        wait.until(ExpectedConditions.visibilityOf(ContinueButton));
+
         Assert.assertTrue(ContinueButton.isEnabled());
         ContinueButton.click();
 
