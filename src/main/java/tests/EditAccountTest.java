@@ -42,6 +42,27 @@ public class EditAccountTest extends BaseTestLogin {
     }
 
 
+    @Test(dataProvider = "EdiAccountJson",priority = 2)
+    public void mainEditPasswordTest(EditAccountModel editAccountModel) throws InterruptedException {
+        EditAccountPage editAccountPage = PageFactory.initElements(driver, EditAccountPage.class);
+
+        editAccountPage.editPasswordFlow(editAccountModel);
+
+    }
+
+
+
+
+    @Test(dataProvider = "EdiAccountJson",priority = 3)
+    public void mainEditEmailTest(EditAccountModel editAccountModel) throws InterruptedException {
+        EditAccountPage editAccountPage = PageFactory.initElements(driver, EditAccountPage.class);
+
+        editAccountPage.editEmailFlow(editAccountModel);
+
+    }
+
+
+
 
 
 

@@ -151,8 +151,8 @@ public class RegisterPage {
 
         Thread.sleep(10000);
         wait.until(ExpectedConditions.visibilityOf(ContinueButton));
-        Thread.sleep(3000);
-       // Assert.assertTrue(ContinueButton.isEnabled());
+
+        Assert.assertTrue(ContinueButton.isEnabled());
         ContinueButton.click();
 
         wait.until(ExpectedConditions.visibilityOf(lastScreenYourInfo));

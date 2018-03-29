@@ -55,6 +55,53 @@ public class EditAccountPage {
     @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.RelativeLayout[5]/android.widget.RelativeLayout/TextInputLayout/android.widget.FrameLayout/android.widget.EditText\n")
     private WebElement successMessage;
 
+    @FindBy (how = How.ID, using = "com.guzmanygomez.gyg.uat:id/profile_edit_password_tv")
+    private WebElement changePasswordLink;
+
+    @FindBy (how = How.ID, using = "com.guzmanygomez.gyg.uat:id/dialog_change_pass_tv_title")
+    private WebElement changePasswordScreen;
+
+    @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.RelativeLayout[1]/TextInputLayout/android.widget.FrameLayout/android.widget.EditText")
+    private WebElement existingPassword;
+
+    @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.RelativeLayout[2]/TextInputLayout/android.widget.FrameLayout/android.widget.EditText")
+    private WebElement changePassword;
+
+    @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.RelativeLayout[3]/TextInputLayout/android.widget.FrameLayout/android.widget.EditText")
+    private WebElement confirmPassword;
+
+    @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.RelativeLayout[3]/TextInputLayout/android.widget.LinearLayout/android.widget.TextView")
+    private WebElement passwordsDoNotMatch;
+
+    @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.Button")
+    private WebElement savePassword;
+
+    @FindBy (how = How.ID, using = "com.guzmanygomez.gyg.uat:id/dialog_tb_tv_title")
+    private WebElement incorrectPassword;
+
+    @FindBy (how = How.ID, using = "com.guzmanygomez.gyg.uat:id/dialog_tb_tv_title")
+    private WebElement incorrectPasswordOkButton;
+
+
+    @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.TextView[3]")
+    private WebElement changeYourEmail;
+
+    @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.RelativeLayout[1]/TextInputLayout/android.widget.FrameLayout/android.widget.EditText")
+    private WebElement newEmail;
+
+    @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.RelativeLayout[2]/TextInputLayout/android.widget.FrameLayout/android.widget.EditText")
+    private WebElement confirmNewEmail;
+
+    @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.RelativeLayout[3]/TextInputLayout/android.widget.FrameLayout/android.widget.EditText")
+    private WebElement password;
+
+    @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.Button")
+    private WebElement saveEmail;
+
+    @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.TextView[2]")
+    private WebElement emailDisplayed;
+
+
 
     public void editAccountFlow(EditAccountModel model) throws InterruptedException {
 
@@ -120,7 +167,115 @@ public class EditAccountPage {
     }
 
 
+    public void editPasswordFlow(EditAccountModel model) throws InterruptedException {
+
+        WebDriverWait wait = new WebDriverWait(driver, 50);
+        wait.until(ExpectedConditions.visibilityOf(moreButton));
+        moreButton.click();
+
+        //-------------Edit account flow------------------
+
+        wait.until(ExpectedConditions.visibilityOf(editAccountButton));
+        editAccountButton.click();
+
+        //---------------Edit password----------------
+
+        wait.until(ExpectedConditions.visibilityOf(changePasswordLink));
+        changePasswordLink.click();
+
+        wait.until(ExpectedConditions.visibilityOf(changePasswordScreen));
+
+        //---------------------Different Passwords--------------------------------
+        //System.out.println(model.getBadPassword());
+        existingPassword.sendKeys(model.getBadPassword());
+        changePassword.sendKeys(model.getNewPassword());
+        confirmPassword.sendKeys(model.getNewPassword2());
+        ((AndroidDriver) driver).hideKeyboard();
+        savePassword.click();
+        wait.until(ExpectedConditions.visibilityOf(passwordsDoNotMatch));
+        assertTrue(passwordsDoNotMatch.isDisplayed());
 
 
+        //---------------------HappyFlow--------------------------------
+
+        existingPassword.clear();
+        changePassword.clear();
+        confirmPassword.clear();
+        existingPassword.sendKeys(model.getOldPassword());
+        changePassword.sendKeys(model.getNewPassword());
+        confirmPassword.sendKeys(model.getNewPassword());
+        ((AndroidDriver) driver).hideKeyboard();
+        savePassword.click();
+        wait.until(ExpectedConditions.visibilityOf(changePasswordLink));
+        Assert.assertTrue(changePasswordLink.isDisplayed());
+
+        //--------------------Change the password back------------------
+
+        wait.until(ExpectedConditions.visibilityOf(changePasswordLink));
+        changePasswordLink.click();
+
+        wait.until(ExpectedConditions.visibilityOf(changePasswordScreen));
+
+        System.out.println(model.getBadPassword());
+        existingPassword.sendKeys(model.getNewPassword());
+        changePassword.sendKeys(model.getOldPassword());
+        confirmPassword.sendKeys(model.getOldPassword());
+        ((AndroidDriver) driver).hideKeyboard();
+        savePassword.click();
+
+        wait.until(ExpectedConditions.visibilityOf(changePasswordLink));
+        Assert.assertTrue(changePasswordLink.isDisplayed());
+    }
+
+    public void editEmailFlow(EditAccountModel model) throws InterruptedException {
+
+        WebDriverWait wait = new WebDriverWait(driver, 50);
+        wait.until(ExpectedConditions.visibilityOf(moreButton));
+        moreButton.click();
+
+        //-------------Edit account flow------------------
+
+        wait.until(ExpectedConditions.visibilityOf(editAccountButton));
+        editAccountButton.click();
+
+        //---------------Edit Email----------------
+        wait.until(ExpectedConditions.visibilityOf(changeYourEmail));
+        changeYourEmail.click();
+
+        wait.until(ExpectedConditions.visibilityOf(newEmail));
+        newEmail.sendKeys(model.getNewEmailAddress());
+        confirmNewEmail.sendKeys(model.getNewEmailAddress());
+        password.sendKeys(model.getOldPassword());
+        ((AndroidDriver)driver).hideKeyboard();
+        saveEmail.click();
+
+        wait.until(ExpectedConditions.visibilityOf(changePasswordLink));
+        Assert.assertTrue(changeYourEmail.isDisplayed());
+
+        changeYourEmail.click();
+        wait.until(ExpectedConditions.visibilityOf(newEmail));
+
+        Assert.assertTrue(emailDisplayed.isDisplayed());
+        Assert.assertEquals(emailDisplayed.getText(),model.getNewEmailAddress());
+
+
+        newEmail.sendKeys(model.getOldEmailAddress());
+        confirmNewEmail.sendKeys(model.getOldEmailAddress());
+        password.sendKeys(model.getOldPassword());
+        ((AndroidDriver)driver).hideKeyboard();
+        saveEmail.click();
+
+        wait.until(ExpectedConditions.visibilityOf(changePasswordLink));
+        Assert.assertTrue(changeYourEmail.isDisplayed());
+
+        changeYourEmail.click();
+        wait.until(ExpectedConditions.visibilityOf(newEmail));
+
+        Assert.assertTrue(emailDisplayed.isDisplayed());
+        Assert.assertEquals(emailDisplayed.getText(),model.getOldEmailAddress());
+
+
+
+    }
 
 }

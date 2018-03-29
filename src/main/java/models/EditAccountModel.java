@@ -10,7 +10,9 @@ public class EditAccountModel {
     private String newPassword2;
     private String badEmail;
     private String zip;
-
+    private String badPassword;
+    private String differentEmail;
+    private String oldEmailAddress;
 
     public String getNewEmailAddress() {
         return newEmailAddress;
@@ -59,6 +61,30 @@ public class EditAccountModel {
 
     public void setZip(String zip) {
         this.zip = zip;
+    }
+
+    public String getBadPassword() {
+        return badPassword;
+    }
+
+    public void setBadPassword(String badPassword) {
+        this.badPassword = badPassword;
+    }
+
+    public String getDifferentEmail() {
+        return differentEmail;
+    }
+
+    public void setDifferentEmail(String differentEmail) {
+        this.differentEmail = differentEmail;
+    }
+
+    public String getOldEmailAddress() {
+        return oldEmailAddress;
+    }
+
+    public void setOldEmailAddress(String oldEmailAddress) {
+        this.oldEmailAddress = oldEmailAddress;
     }
 
 

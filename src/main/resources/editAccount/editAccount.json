@@ -1,9 +1,12 @@
 {
-  "newEmailAddress": "adytestare+2202d@gmail.com",
+  "newEmailAddress": "adytestare+2903a@gmail.com",
   "oldPassword":"test",
   "newPassword":"test12345",
   "newPassword2":"test123456789",
   "badEmail":"dsadsa",
-  "zip":"4444"
+  "zip":"4444",
+  "badPassword":"pkjhggjh",
+  "differentEmail":"dsadsa@dasda.com",
+  "oldEmailAddress":"adytestare+2903@gmail.com"
 
 }
