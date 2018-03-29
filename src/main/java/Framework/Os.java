@@ -1,4 +1,4 @@
-package tests;
+package Framework;
 
 import enums.Mobile;
 import io.appium.java_client.android.AndroidDriver;

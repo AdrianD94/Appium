@@ -1,13 +1,12 @@
 package tests;
 
+import Framework.BaseTestLogin;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import models.EditAccountModel;
-import models.RegisterModel;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.EditAccountPage;
-import pages.RegisterPage;
 
 import java.io.File;
 import java.io.IOException;
