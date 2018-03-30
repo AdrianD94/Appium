@@ -39,7 +39,7 @@ public class OrderTest extends BaseTestLogin {
         loginPage.CheckChurosScenario("Newtown");
 
     }*/
-   /* @Test(priority=1)
+    @Test(priority=1)
     public void Order() throws InterruptedException {
         OrderPage orderPage = PageFactory.initElements(driver, OrderPage.class);
         orderPage.AddProductToCart("Newtown");
@@ -54,7 +54,7 @@ public class OrderTest extends BaseTestLogin {
 
 
     }
-*/
+
     @Test(priority=3)
     public void changeRestaurantOrder() throws InterruptedException {
         OrderPage orderPage = PageFactory.initElements(driver, OrderPage.class);
