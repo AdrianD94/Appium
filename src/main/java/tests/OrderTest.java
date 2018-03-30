@@ -34,23 +34,39 @@ public class OrderTest extends BaseTestLogin {
 
 
     /*@Test(dataProvider = "LoginJson",priority=2)
-    public void ChurosScenario(LoginModel loginModel) throws InterruptedException {
+    public void ChurosScenario() throws InterruptedException {
         OrderPage loginPage = PageFactory.initElements(driver, OrderPage.class);
         loginPage.CheckChurosScenario("Newtown");
 
     }*/
-    @Test(dataProvider = "LoginJson",priority=3)
-    public void AddProductToCartTest(LoginModel loginModel) throws InterruptedException {
+    @Test(priority=1)
+    public void Order() throws InterruptedException {
         OrderPage orderPage = PageFactory.initElements(driver, OrderPage.class);
         orderPage.AddProductToCart("Newtown");
 
 
     }
 
-    @Test(dataProvider = "LoginJson",priority=4)
-    public void Reorder(LoginModel loginModel) throws InterruptedException {
+    @Test(priority=2)
+    public void Reorder() throws InterruptedException {
         OrderPage orderPage = PageFactory.initElements(driver, OrderPage.class);
         orderPage.reorder("Newtown");
+
+
+    }
+
+    @Test(priority=3)
+    public void changeRestaurantOrder() throws InterruptedException {
+        OrderPage orderPage = PageFactory.initElements(driver, OrderPage.class);
+        orderPage.changeRestaurantOrder("Newtown","Perth Airport");
+
+
+    }
+
+    @Test(priority=4)
+    public void reorderChangeRestaurantOrder() throws InterruptedException {
+        OrderPage orderPage = PageFactory.initElements(driver, OrderPage.class);
+        orderPage.reorderChangeRestaurantOrder("Newtown","Perth Airport");
 
 
     }

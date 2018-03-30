@@ -22,20 +22,7 @@ public class OrderPage {
 
     }
 
-    @FindBy(how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/android.widget.FrameLayout/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.Button[2]")
-    private WebElement loginInButton;
 
-    @FindBy(how = How.ID, using = "com.guzmanygomez.gyg.uat:id/rf_edit_text")
-    private WebElement emailField;
-
-    @FindBy(how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.RelativeLayout[2]/TextInputLayout/android.widget.FrameLayout/android.widget.EditText")
-    private WebElement passwordField;
-
-    @FindBy(how = How.ID, using = "com.guzmanygomez.gyg.uat:id/f_start_but_login")
-    private WebElement loginButton;
-
-    @FindBy (how = How.ID, using = "com.guzmanygomez.gyg.uat:id/dialog_tb_tv_text")
-    private WebElement loginError;
 
     @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/android.widget.FrameLayout/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.TextView[2]")
     private WebElement welcomeMessage;
@@ -117,6 +104,15 @@ public class OrderPage {
     @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.ViewSwitcher/android.widget.LinearLayout/android.widget.LinearLayout/android.support.v7.widget.RecyclerView/android.widget.FrameLayout[1]/android.widget.LinearLayout\n")
     private WebElement payPallPurchase;
 
+    @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.LinearLayout/android.widget.Button\n")
+    private WebElement changeTaqueria;
+
+
+    @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.LinearLayout/android.widget.TextView[2]")
+    private WebElement changedTaqueria;
+
+    @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.LinearLayout/android.widget.TextView[1]\n")
+    private WebElement changedTaqueriaOrderStatus;
 
 
 
@@ -306,7 +302,169 @@ public class OrderPage {
 
             Assert.assertEquals(orderStatus.getText(), "Success");
 
+    }
 
+    public void changeRestaurantOrder(String storeName,String changeRestaurant) throws InterruptedException {
+
+        WebDriverWait wait=new WebDriverWait(driver,60);
+        wait.until(ExpectedConditions.visibilityOf(locationButton));
+        locationButton.click();
+        wait.until(ExpectedConditions.visibilityOf(searchField));
+        searchField.sendKeys(storeName);
+
+        Thread.sleep(2000);
+        TouchAction tap=new TouchAction((AndroidDriver)driver);
+        tap.press(PointOption.point(202,594)).release();
+        tap.perform();
+
+        wait.until(ExpectedConditions.visibilityOf(orderNowButton));
+        orderNowButton.click();
+
+        wait.until(ExpectedConditions.visibilityOf(burritoBowls));
+        burritoBowls.click();
+
+        wait.until(ExpectedConditions.visibilityOf(grilledChicken));
+        grilledChicken.click();
+
+        nextButtonFillings.click();
+
+        wait.until(ExpectedConditions.visibilityOf(nextButtonExtras));
+        nextButtonExtras.click();
+
+        wait.until(ExpectedConditions.visibilityOf(addPayButton));
+        addPayButton.click();
+
+        wait.until(ExpectedConditions.visibilityOf(checkoutButton));
+        checkoutButton.click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.view.ViewGroup\n")));
+
+        //------------change restaurant------------
+        changeTaqueria.click();
+        wait.until(ExpectedConditions.visibilityOf(searchField));
+        searchField.sendKeys(changeRestaurant);
+        Thread.sleep(2000);
+        tap.press(PointOption.point(314,588)).release().perform();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.view.ViewGroup\n")));
+
+        assertTrue(changedTaqueria.isDisplayed());
+        assertEquals(changedTaqueria.getText(),changeRestaurant);
+
+        Dimension size = this.driver.manage ()
+                .window ()
+                .getSize ();
+        int startX = size.getWidth () / 2;
+        int startY = size.getHeight () / 2;
+        int endX = 0;
+        int endY = (int) (startY * -1 * 0.75);
+
+        tap.press (PointOption.point(startX, startY))
+                .moveTo (PointOption.point(endX, endY))
+                .release ()
+                .perform ();
+
+        wait.until(ExpectedConditions.visibilityOf(payPallButton));
+        payPallButton.click();
+
+        wait.until(ExpectedConditions.visibilityOf(tapToMakeOrderButton));
+        tapToMakeOrderButton.click();
+
+        wait.until(ExpectedConditions.visibilityOf(payPallPurchase));
+        //tap.press(PointOption.point(213,1283)).release().perform();
+        payPallPurchase.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/android.widget.LinearLayout/android.widget.TextView")));
+
+        Assert.assertEquals(orderStatus.getText(),"Success");
+
+        Dimension size2 = this.driver.manage ()
+                .window ()
+                .getSize ();
+        int startX2 = size.getWidth () / 2;
+        int startY2 = size.getHeight () / 2;
+        int endX2 = 0;
+        int endY2 = (int) (startY2 * -1 * 0.75);
+
+        tap.press (PointOption.point(startX2, startY2))
+                .moveTo (PointOption.point(endX2, endY2))
+                .release ()
+                .perform ();
+        assertTrue(changedTaqueriaOrderStatus.isDisplayed());
+        assertEquals(changedTaqueriaOrderStatus.getText(),changeRestaurant);
+    }
+
+
+    public void reorderChangeRestaurantOrder(String storeName,String changeRestaurant) throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, 50);
+
+        wait.until(ExpectedConditions.visibilityOf(reorderChangeLocation));
+        reorderChangeLocation.click();
+
+        wait.until(ExpectedConditions.visibilityOf(reorderSearchInput));
+        reorderSearchInput.sendKeys(storeName);
+        Thread.sleep(2000);
+        TouchAction tap = new TouchAction((AndroidDriver) driver);
+        tap.press(PointOption.point(219, 588)).release().perform();
+        wait.until(ExpectedConditions.visibilityOf(welcomeMessage));
+        tap.press(PointOption.point(1037, 1390)).release().perform();
+        wait.until(ExpectedConditions.visibilityOf(checkoutButton));
+        checkoutButton.click();
+
+
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.view.ViewGroup\n")));
+
+        //--------------Change Restaurant
+
+        changeTaqueria.click();
+        wait.until(ExpectedConditions.visibilityOf(searchField));
+        searchField.sendKeys(changeRestaurant);
+        Thread.sleep(2000);
+        tap.press(PointOption.point(314,588)).release().perform();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.view.ViewGroup\n")));
+
+        assertTrue(changedTaqueria.isDisplayed());
+        assertEquals(changedTaqueria.getText(),changeRestaurant);
+
+        Dimension size = this.driver.manage ()
+                .window ()
+                .getSize ();
+        int startX = size.getWidth () / 2;
+        int startY = size.getHeight () / 2;
+        int endX = 0;
+        int endY = (int) (startY * -1 * 0.75);
+
+        tap.press (PointOption.point(startX, startY))
+                .moveTo (PointOption.point(endX, endY))
+                .release ()
+                .perform ();
+
+        wait.until(ExpectedConditions.visibilityOf(payPallButton));
+        payPallButton.click();
+
+        wait.until(ExpectedConditions.visibilityOf(tapToMakeOrderButton));
+        tapToMakeOrderButton.click();
+
+        wait.until(ExpectedConditions.visibilityOf(payPallPurchase));
+        //tap.press(PointOption.point(213,1283)).release().perform();
+        payPallPurchase.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/android.widget.LinearLayout/android.widget.TextView")));
+
+        Assert.assertEquals(orderStatus.getText(),"Success");
+
+        Dimension size2 = this.driver.manage ()
+                .window ()
+                .getSize ();
+        int startX2 = size.getWidth () / 2;
+        int startY2 = size.getHeight () / 2;
+        int endX2 = 0;
+        int endY2 = (int) (startY2 * -1 * 0.75);
+
+        tap.press (PointOption.point(startX2, startY2))
+                .moveTo (PointOption.point(endX2, endY2))
+                .release ()
+                .perform ();
+        assertTrue(changedTaqueriaOrderStatus.isDisplayed());
+        assertEquals(changedTaqueriaOrderStatus.getText(),changeRestaurant);
 
     }
 }
