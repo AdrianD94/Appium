@@ -71,6 +71,14 @@ public class OrderTest extends BaseTestLogin {
 
     }
 
+    @Test(priority=5)
+    public void reorderRecentOrder() throws InterruptedException {
+        OrderPage orderPage = PageFactory.initElements(driver, OrderPage.class);
+        orderPage.reorderRecentOrder("Newtown");
+
+
+    }
+
 
 
 
