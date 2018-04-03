@@ -33,6 +33,14 @@ public class LoginTest extends BaseTestLogin {
     }
 
     @Test(dataProvider = "LoginJson",priority = 1)
+    public void forgotPasswordTest(LoginModel loginModel) throws InterruptedException {
+        LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+
+        loginPage.ForgotPassword(loginModel);
+
+    }
+
+    @Test(dataProvider = "LoginJson",priority = 2)
     public void mainLoginTest(LoginModel loginModel) throws InterruptedException {
         LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 

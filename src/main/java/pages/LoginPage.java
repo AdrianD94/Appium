@@ -51,6 +51,23 @@ public class LoginPage {
     @FindBy (how = How.ID, using = "com.guzmanygomez.gyg.uat:id/dialog_tb_but_left")
     private WebElement wrongLoginDialogOk;
 
+    @FindBy (how = How.ID, using = "com.guzmanygomez.gyg.uat:id/f_start_tv_forgot")
+    private WebElement forgotPasswordLink;
+
+    @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.TextView[1]")
+    private WebElement resetPasswordScreen;
+
+    @FindBy (how = How.ID, using = "com.guzmanygomez.gyg.uat:id/rf_edit_text")
+    private WebElement forgotPasswordEmailField;
+
+    @FindBy (how = How.ID, using = "com.guzmanygomez.gyg.uat:id/f_fp_but_submit")
+    private WebElement submitButton;
+
+    @FindBy (how = How.ID, using = "com.guzmanygomez.gyg.uat:id/dialog_tb_tv_text")
+    private WebElement wrongEmailDialog;
+
+    @FindBy (how = How.ID, using = "com.guzmanygomez.gyg.uat:id/dialog_tb_but_left")
+    private WebElement wrongEmailDialogOkButton;
     //-----------------------------------------------------------------------------------------------
 
 
@@ -124,6 +141,27 @@ public class LoginPage {
 
     }
 
+    public void ForgotPassword(LoginModel model) throws InterruptedException {
+        WebDriverWait wait=new WebDriverWait(driver,20);
+        wait.until(ExpectedConditions.visibilityOf(loginInButton));
+        loginInButton.click();
+        wait.until(ExpectedConditions.visibilityOf(forgotPasswordLink));
+        forgotPasswordLink.click();
+        wait.until(ExpectedConditions.visibilityOf(resetPasswordScreen));
+        forgotPasswordEmailField.sendKeys(model.getBadEmail());
+        Assert.assertFalse(submitButton.isEnabled());
+        forgotPasswordEmailField.clear();
+        forgotPasswordEmailField.sendKeys(model.getWrongEmail());
+        submitButton.click();
+        wait.until(ExpectedConditions.visibilityOf(wrongEmailDialog));
+        wrongEmailDialogOkButton.click();
+        forgotPasswordEmailField.clear();
+        forgotPasswordEmailField.sendKeys(model.getEmailAddress());
+        submitButton.click();
+        wait.until(ExpectedConditions.visibilityOf(forgotPasswordLink));
+
+
+    }
 
 
 }
