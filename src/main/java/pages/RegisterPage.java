@@ -164,6 +164,7 @@ public class RegisterPage {
         //Check the home page redirect
         wait.until(ExpectedConditions.visibilityOf(welcomeMessage));
         assertEquals(welcomeMessage.getText(),"Welcome "+model.getFirstName());
+
     }
 
 
