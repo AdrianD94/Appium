@@ -1,6 +1,7 @@
 package pages;
 import io.appium.java_client.*;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidKeyCode;
 import io.appium.java_client.touch.offset.PointOption;
 import models.LoginModel;
 import org.openqa.selenium.*;
@@ -133,9 +134,10 @@ public class OrderPage {
 
         Thread.sleep(2000);
         TouchAction tap=new TouchAction((AndroidDriver)driver);
-        tap.press(PointOption.point(202,594)).release();
-        tap.perform();
-
+        //tap.press(PointOption.point(202,594)).release();
+        //tap.perform();
+        ((AndroidDriver)driver).pressKeyCode(AndroidKeyCode.KEYCODE_PAGE_DOWN);
+        ((AndroidDriver)driver).pressKeyCode(AndroidKeyCode.KEYCODE_ENTER);
         wait.until(ExpectedConditions.visibilityOf(orderNowButton));
         orderNowButton.click();
 
@@ -156,9 +158,10 @@ public class OrderPage {
         wait.until(ExpectedConditions.visibilityOf(checkoutButton));
         checkoutButton.click();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.view.ViewGroup\n")));
 
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("com.guzmanygomez.gyg.uat:id/order_tv_title")));
 
+        /*
         Dimension size = this.driver.manage ()
                 .window ()
                 .getSize ();
@@ -171,7 +174,11 @@ public class OrderPage {
                 .moveTo (PointOption.point(endX, endY))
                 .release ()
                 .perform ();
+        */
 
+        String name ="android.widget.ImageView";
+
+        ((AndroidDriver) driver).findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().className(\""+name+"\").instance(0))");
         wait.until(ExpectedConditions.visibilityOf(payPallButton));
         payPallButton.click();
 

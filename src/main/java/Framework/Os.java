@@ -30,7 +30,7 @@ public class Os {
 
                 capabilities.setCapability("appPackage", "com.guzmanygomez.gyg.uat");
 // This package name of your app (you can get it from apk info app)
-                capabilities.setCapability("appActivity","com.guzmanygomez.gyg.ui.activities.MainActivity"); // This is Launcher activity of your app (you can get it from apk info app)
+                capabilities.setCapability("appActivity","com.guzmanygomez.gyg.ui.activities.SplashActivity"); // This is Launcher activity of your app (you can get it from apk info app)
 //Create RemoteWebDriver instance and connect to the Appium server
                 //It will launch the Calculator App in Android Device using the configurations specified in Desired Capabilities
                 driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
